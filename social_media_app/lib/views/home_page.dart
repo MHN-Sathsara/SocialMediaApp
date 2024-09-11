@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../controllers/post_controller.dart';
 import '../models/post.dart';
 import 'add_post_page.dart';
-import 'comments_page.dart';
+import 'comment_page.dart';
 import 'edit_post_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -62,10 +62,8 @@ class HomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CommentsPage(
-                          postId: post.id,
-                          postTitle: post.title,
-                          postBody: post.body,
+                        builder: (context) => CommentPage(
+                          post: post,
                         ),
                       ),
                     );
