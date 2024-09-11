@@ -14,6 +14,7 @@ class CommentPage extends StatefulWidget {
 
 class _CommentPageState extends State<CommentPage> {
   final CommentController commentController = CommentController();
+  final TextEditingController _commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +99,56 @@ class _CommentPageState extends State<CommentPage> {
           ),
         ],
       ),
+      bottomNavigationBar: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _commentController,
+                  decoration: InputDecoration(
+                    hintText: 'Add a comment...',
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.send),
+                onPressed: () {
+                  if (_commentController.text.isNotEmpty) {
+                    // Handle adding the comment
+                    final newComment = Comment(
+                      id: '', // Temporary ID, replace with actual ID
+                      postId: widget.post.id,
+                      name: 'User', // Replace with actual user name
+                      email: 'user@example.com', // Replace with actual email
+                      body: _commentController.text,
+                    );
+                    commentController.addComment(newComment);
+                    _commentController.clear();
+                    // Refresh the comments list
+                    setState(() {});
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -179,7 +230,7 @@ class _CommentPageState extends State<CommentPage> {
                   if (replyController.text.isNotEmpty) {
                     // Handle reply logic here, like posting a new comment
                     final newComment = Comment(
-                      id: 0, // Temporary ID, replace with actual ID
+                      id: '', // Temporary ID, replace with actual ID
                       postId: comment.postId,
                       name: 'User', // Replace with actual user name
                       email: 'user@example.com', // Replace with actual email

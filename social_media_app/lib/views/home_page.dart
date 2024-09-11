@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                         );
                       } else if (value == 'delete') {
                         // Call deletePost
-                        postController.deletePost(post.id);
+                        postController.deletePost(post.id.toString());
                       }
                     },
                     itemBuilder: (context) => [
