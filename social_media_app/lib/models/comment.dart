@@ -17,6 +17,7 @@ class Comment {
     this.downvotes = 0,
   });
 
+
 factory Comment.fromJson(Map<String, dynamic> json) {
   return Comment(
     id: json['_id'], // Use '_id' if that's the field name in the response
