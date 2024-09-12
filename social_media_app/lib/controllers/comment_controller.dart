@@ -4,7 +4,7 @@ import '../models/comment.dart';
 
 class CommentController {
   final String apiUrl =
-      'https://crudcrud.com/api/719448c322a346e4ab17e58eac1ce701/comments';
+      'https://my-json-server.typicode.com/MHN-Sathsara/SocialMediaApp/comments';
 
   // Fetch comments for a specific post
   Future<List<Comment>> fetchComments(String postId) async {

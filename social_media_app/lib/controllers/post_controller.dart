@@ -4,7 +4,7 @@ import '../models/post.dart';
 
 class PostController {
   final String apiUrl =
-      'https://crudcrud.com/api/719448c322a346e4ab17e58eac1ce701/posts';
+      'https://my-json-server.typicode.com/MHN-Sathsara/SocialMediaApp/posts';
 
   // Fetch posts from the API
   Future<List<Post>> fetchPosts() async {
