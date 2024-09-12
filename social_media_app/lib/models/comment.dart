@@ -17,13 +17,14 @@ class Comment {
     this.downvotes = 0,
   });
 
-  factory Comment.fromJson(Map<String, dynamic> json) {
-    return Comment(
-      id: json['id'],
-      postId: json['postId'],
-      name: json['name'],
-      email: json['email'],
-      body: json['body'],
-    );
-  }
+
+factory Comment.fromJson(Map<String, dynamic> json) {
+  return Comment(
+    id: json['_id'], // Use '_id' if that's the field name in the response
+    postId: json['postId'],
+    name: json['name'],
+    email: json['email'],
+    body: json['body'],
+  );
+}
 }
