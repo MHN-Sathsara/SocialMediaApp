@@ -4,7 +4,7 @@ import '../models/post.dart';
 
 class PostController {
   final String apiUrl =
-      'https://crudcrud.com/api/719448c322a346e4ab17e58eac1ce701/posts';
+      'https://crudcrud.com/api/cad17339af9e44da8e490170e2265866/posts';
 
   // Fetch posts from the API
   Future<List<Post>> fetchPosts() async {

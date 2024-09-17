@@ -4,27 +4,28 @@ import '../models/comment.dart';
 
 class CommentController {
   final String apiUrl =
-      'https://crudcrud.com/api/719448c322a346e4ab17e58eac1ce701/comments';
+      'https://crudcrud.com/api/cad17339af9e44da8e490170e2265866/comments';
 
   // Fetch comments for a specific post
 
-Future<List<Comment>> fetchComments(String postId) async {
-  print('Fetching comments for post ID: $postId');
-  final response = await http.get(Uri.parse(apiUrl));
+  Future<List<Comment>> fetchComments(String postId) async {
+    print('Fetching comments for post ID: $postId');
+    final response = await http.get(Uri.parse(apiUrl));
 
-   print(response.body);
+    print(response.body);
 
-  if (response.statusCode == 200) {
-    final List<dynamic> jsonData = jsonDecode(response.body);
-    // Filter the comments by the postId locally
-    return jsonData
-        .map((data) => Comment.fromJson(data))
-        .where((comment) => comment.postId == postId)
-        .toList();
-  } else {
-    throw Exception('Failed to load comments');
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonData = jsonDecode(response.body);
+      // Filter the comments by the postId locally
+      return jsonData
+          .map((data) => Comment.fromJson(data))
+          .where((comment) => comment.postId == postId)
+          .toList();
+    } else {
+      throw Exception('Failed to load comments');
+    }
   }
-}
+
   // Add a new comment
   Future<void> addComment(Comment newComment) async {
     final response = await http.post(
