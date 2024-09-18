@@ -12,6 +12,12 @@
         "title": "Second Post",
         "body": "This is the second post body",
         "userId": 2
+      },
+      {
+        "id": "3",
+        "title": "3rd Post",
+        "body": "This is the third post body",
+        "userId": 3
       }
     ],
     "comments": [

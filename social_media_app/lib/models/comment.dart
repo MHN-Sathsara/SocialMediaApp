@@ -24,6 +24,8 @@ class Comment {
       name: json['name'],
       email: json['email'],
       body: json['body'],
+      upvotes: json['upvotes'] ?? 0,
+      downvotes: json['downvotes'] ?? 0,
     );
   }
 }

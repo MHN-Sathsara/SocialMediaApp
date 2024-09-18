@@ -53,7 +53,7 @@ class _CommentPageState extends State<CommentPage> {
                             // Add upvote logic here
                           },
                         ),
-                        Text('${widget.post.upvotes ?? 0}'),
+                        Text('${widget.post.upvotes}'),
                         IconButton(
                           icon: Icon(Icons.arrow_downward),
                           onPressed: () {
@@ -76,7 +76,8 @@ class _CommentPageState extends State<CommentPage> {
           Divider(),
           Expanded(
             child: FutureBuilder<List<Comment>>(
-              future: commentController.fetchComments(widget.post.id),
+              future:
+                  commentController.fetchComments(widget.post.id.toString()),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -132,12 +133,15 @@ class _CommentPageState extends State<CommentPage> {
                   if (_commentController.text.isNotEmpty) {
                     // Handle adding the comment
                     final newComment = Comment(
-                      id: '', // Temporary ID, replace with actual ID
+                      id: DateTime.now()
+                          .millisecondsSinceEpoch
+                          .toString(), // Unique ID
                       postId: widget.post.id,
-                      name: 'User', // Replace with actual user name
-                      email: 'user@example.com', // Replace with actual email
+                      name: 'User',
+                      email: 'user@example.com',
                       body: _commentController.text,
                     );
+
                     commentController.addComment(newComment);
                     _commentController.clear();
                     // Refresh the comments list
