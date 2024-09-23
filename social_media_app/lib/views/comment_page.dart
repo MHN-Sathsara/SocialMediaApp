@@ -53,7 +53,7 @@ class _CommentPageState extends State<CommentPage> {
                             // Add upvote logic here
                           },
                         ),
-                        Text('${widget.post.upvotes ?? 0}'),
+                        Text('${widget.post.upvotes}'),
                         IconButton(
                           icon: Icon(Icons.arrow_downward),
                           onPressed: () {
@@ -76,7 +76,8 @@ class _CommentPageState extends State<CommentPage> {
           Divider(),
           Expanded(
             child: FutureBuilder<List<Comment>>(
-              future: commentController.fetchComments(widget.post.id),
+              future: commentController.fetchComments(
+                  int.parse(widget.post.id)), // Convert widget.post.id to int
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -128,20 +129,26 @@ class _CommentPageState extends State<CommentPage> {
               ),
               IconButton(
                 icon: Icon(Icons.send),
-                onPressed: () {
+                onPressed: () async {
                   if (_commentController.text.isNotEmpty) {
-                    // Handle adding the comment
                     final newComment = Comment(
-                      id: '', // Temporary ID, replace with actual ID
-                      postId: widget.post.id,
-                      name: 'User', // Replace with actual user name
-                      email: 'user@example.com', // Replace with actual email
+                      id: '',
+                      postId: int.parse(widget.post
+                          .id), // Convert widget.post.id to int here as well
+                      name: 'User',
+                      email: 'user@example.com',
                       body: _commentController.text,
+                      upvotes: 0,
+                      downvotes: 0,
                     );
-                    commentController.addComment(newComment);
-                    _commentController.clear();
-                    // Refresh the comments list
-                    setState(() {});
+
+                    try {
+                      await commentController.addComment(newComment);
+                      _commentController.clear();
+                      setState(() {}); // Refresh the comments
+                    } catch (error) {
+                      print('Failed to add comment: $error');
+                    }
                   }
                 },
               ),
@@ -161,8 +168,8 @@ class _CommentPageState extends State<CommentPage> {
           Row(
             children: [
               CircleAvatar(
-                  child:
-                      Icon(Icons.person)), // Placeholder for user profile pic
+                child: Icon(Icons.person),
+              ),
               SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,7 +189,7 @@ class _CommentPageState extends State<CommentPage> {
                   // Handle comment upvote logic
                 },
               ),
-              Text('${comment.upvotes ?? 0}'),
+              Text('${comment.upvotes}'),
               IconButton(
                 icon: Icon(Icons.arrow_downward),
                 onPressed: () {
@@ -191,11 +198,7 @@ class _CommentPageState extends State<CommentPage> {
               ),
               TextButton(
                 onPressed: () {
-                  // Show reply input field
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) => _buildReplyForm(comment),
-                  );
+                  // Show reply form logic
                 },
                 child: Text('Reply'),
               ),
@@ -204,48 +207,6 @@ class _CommentPageState extends State<CommentPage> {
           Divider(),
         ],
       ),
-    );
-  }
-
-  Widget _buildReplyForm(Comment comment) {
-    return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
-        final TextEditingController replyController = TextEditingController();
-
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: replyController,
-                decoration: InputDecoration(
-                  labelText: 'Write a reply...',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 8),
-              ElevatedButton(
-                onPressed: () {
-                  if (replyController.text.isNotEmpty) {
-                    // Handle reply logic here, like posting a new comment
-                    final newComment = Comment(
-                      id: '', // Temporary ID, replace with actual ID
-                      postId: comment.postId,
-                      name: 'User', // Replace with actual user name
-                      email: 'user@example.com', // Replace with actual email
-                      body: replyController.text,
-                    );
-                    commentController.addComment(newComment);
-                    Navigator.pop(context); // Close the modal bottom sheet
-                  }
-                },
-                child: Text('Submit Reply'),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

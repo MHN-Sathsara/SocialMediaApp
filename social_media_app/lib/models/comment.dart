@@ -1,11 +1,11 @@
 class Comment {
   final String id;
-  final String postId;
+  final int postId; // Ensure this is an int
   final String name;
   final String email;
   final String body;
-  int? upvotes; // Optional field for upvotes
-  int? downvotes;
+  int upvotes; // Non-nullable
+  int downvotes; // Non-nullable
 
   Comment({
     required this.id,
@@ -17,14 +17,16 @@ class Comment {
     this.downvotes = 0,
   });
 
-
-factory Comment.fromJson(Map<String, dynamic> json) {
-  return Comment(
-    id: json['_id'], // Use '_id' if that's the field name in the response
-    postId: json['postId'],
-    name: json['name'],
-    email: json['email'],
-    body: json['body'],
-  );
-}
+  factory Comment.fromJson(Map<String, dynamic> json) {
+    return Comment(
+      id: json['_id'] ?? '', // Ensure there's a fallback if '_id' is missing
+      postId:
+          int.parse(json['postId'].toString()), // Convert to int if necessary
+      name: json['name'] ?? '', // Ensure fallback
+      email: json['email'] ?? '', // Ensure fallback
+      body: json['body'] ?? '', // Ensure fallback
+      upvotes: json['upvotes'] ?? 0, // Handle optional field
+      downvotes: json['downvotes'] ?? 0, // Handle optional field
+    );
+  }
 }
