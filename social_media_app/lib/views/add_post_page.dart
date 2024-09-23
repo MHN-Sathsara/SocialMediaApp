@@ -54,7 +54,7 @@ class AddPostPage extends StatelessWidget {
                   if (_formKey.currentState!.validate()) {
                     postController.addPost(
                       Post(
-                        id: '', // ID will be assigned by the API
+                        id: 0, // ID will be assigned by the API
                         userId:
                             1, // Placeholder for now, replace with actual user ID
                         title: titleController.text,

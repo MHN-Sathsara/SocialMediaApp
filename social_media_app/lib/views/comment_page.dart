@@ -76,8 +76,8 @@ class _CommentPageState extends State<CommentPage> {
           Divider(),
           Expanded(
             child: FutureBuilder<List<Comment>>(
-              future: commentController.fetchComments(
-                  int.parse(widget.post.id)), // Convert widget.post.id to int
+              future: commentController.fetchComments(int.parse(
+                  widget.post.id as String)), // Convert widget.post.id to int
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -133,8 +133,8 @@ class _CommentPageState extends State<CommentPage> {
                   if (_commentController.text.isNotEmpty) {
                     final newComment = Comment(
                       id: '',
-                      postId: int.parse(widget.post
-                          .id), // Convert widget.post.id to int here as well
+                      postId: int.parse(widget.post.id
+                          as String), // Convert widget.post.id to int here as well
                       name: 'User',
                       email: 'user@example.com',
                       body: _commentController.text,

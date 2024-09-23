@@ -1,5 +1,5 @@
 class Post {
-  final String id; // ID as String
+  final int id; // ID as int now
   final int userId;
   final String title;
   final String body;
@@ -7,7 +7,7 @@ class Post {
   int downvotes;
 
   Post({
-    required this.id,
+    required this.id, // Change this to int
     required this.userId,
     required this.title,
     required this.body,
@@ -17,18 +17,18 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      id: json['_id'] ?? '', // Ensure the ID is fetched correctly
-      userId: json['userId'] ?? 0, // Default to 0 if missing
+      id: json['id'] ?? 0, // Ensure the ID is fetched correctly
+      userId: json['userId'] ?? 0,
       title: json['title'] ?? '',
       body: json['body'] ?? '',
-      upvotes: json['upvotes'] ?? 0, // Default to 0 if missing
-      downvotes: json['downvotes'] ?? 0, // Default to 0 if missing
+      upvotes: json['upvotes'] ?? 0,
+      downvotes: json['downvotes'] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      '_id': id, // Use '_id' if that’s the expected key in the API
+      'id': id, // Change this to 'id'
       'userId': userId,
       'title': title,
       'body': body,

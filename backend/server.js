@@ -12,23 +12,22 @@ app.use(cors());
 // In-memory database for posts
 let postsList = [
     {
-        id: 1,
+        id: "1", // Change this to a string
         uniqueId: "post_1687452800000",
         content: "Just had an amazing day at the beach!",
         timestamp: 1687452800000,
         userId: 1,
-        comments: [] // Empty array for comments
+        comments: []
     },
     {
-        id: 2,
+        id: "2", // Change this to a string
         uniqueId: "post_1687539200000",
         content: "Check out this beautiful sunset!",
         imageUrl: "https://images.pexels.com/photos/11659750/pexels-photo-11659750.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         timestamp: 1687539200000,
         userId: 2,
-        comments: [] // Empty array for comments
-    },
-    // Add other posts as needed...
+        comments: []
+    }
 ];
 
 // API Routes
