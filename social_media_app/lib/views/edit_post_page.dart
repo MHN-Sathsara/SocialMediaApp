@@ -64,6 +64,9 @@ class EditPostPage extends StatelessWidget {
                         userId: post.userId,
                         title: titleController.text,
                         body: bodyController.text,
+                        uniqueId: post.uniqueId,
+                        content: '',
+                        timestamp: DateTime.now().millisecondsSinceEpoch,
                       ),
                     );
                     Navigator.pop(context);

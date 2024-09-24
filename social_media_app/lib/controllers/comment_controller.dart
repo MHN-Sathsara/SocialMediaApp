@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../models/comment.dart'; // Import your comment model
 
 class CommentController {
-  final String apiUrl = 'http://10.0.2.2:3000/api/v1/posts';
+  final String apiUrl = 'http://10.0.2.2:3000/api/v1/comments';
 
   // Fetch comments for a specific post
   Future<List<Comment>> fetchComments(int postId) async {

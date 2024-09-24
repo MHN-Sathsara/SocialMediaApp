@@ -7,6 +7,7 @@ import 'edit_post_page.dart';
 
 class HomePage extends StatelessWidget {
   final PostController postController = PostController();
+  final String serverUrl = 'http://10.0.2.2:3000'; // Added server URL
 
   @override
   Widget build(BuildContext context) {

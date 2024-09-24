@@ -3,7 +3,8 @@ import 'dart:convert';
 import '../models/post.dart';
 
 class PostController {
-  final String apiUrl = 'http://10.0.2.2:3000/api/v1/posts';
+  //when ur a running the backend put ur device ip in this url
+  final String apiUrl = 'http://      :3000/api/v1/posts';
 
   // Fetch posts from the API
   Future<List<Post>> fetchPosts() async {
